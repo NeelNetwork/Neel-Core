@@ -64,8 +64,8 @@ const inSetter = state => (holding, hasNew) => () => {
 // FARZAD Change : accept zero sourceQuantity2
 const countSetter = state => inQuantity => {
 
-  alert('inQuantity' + inQuantity)
-  alert('state.offer.sourceQuantity' + state.offer.sourceQuantity)
+  // alert('inQuantity' + inQuantity)
+  // alert('state.offer.sourceQuantity' + state.offer.sourceQuantity)
 
   if(inQuantity !=0  && state.offer.sourceQuantity !=0 ){
 
