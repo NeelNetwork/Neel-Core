@@ -15,10 +15,11 @@
 
 import logging
 
-import rethinkdb as r
+import rethinkdb as re
 
 from api.errors import ApiBadRequest
 
+r=re.RethinkDB()
 
 LOGGER = logging.getLogger(__name__)
 

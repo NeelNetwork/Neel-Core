@@ -13,7 +13,7 @@
 # limitations under the License.
 # ------------------------------------------------------------------------------
 
-import rethinkdb as r
+import rethinkdb as re
 from rethinkdb.errors import ReqlNonExistenceError
 
 from api.errors import ApiBadRequest
@@ -21,8 +21,10 @@ from api.errors import ApiBadRequest
 from db.common import fetch_holdings
 from db.common import fetch_latest_block_num
 
+r=re.RethinkDB()
 
 async def fetch_all_account_resources(conn):
+
     return await r.table('accounts')\
         .filter((fetch_latest_block_num() >= r.row['start_block_num'])
                 & (fetch_latest_block_num() < r.row['end_block_num']))\

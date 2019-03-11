@@ -20,7 +20,7 @@ import os
 from signal import signal, SIGINT
 import sys
 
-import rethinkdb as r
+import rethinkdb as re
 
 from sanic import Sanic
 
@@ -56,9 +56,10 @@ DEFAULT_CONFIG = {
     'AES_KEY': None,
     'BATCHER_PRIVATE_KEY': None
 }
-
+r=re.RethinkDB()
 
 async def open_connections(app):
+    
     LOGGER.warning('opening database connection')
     r.set_loop_type('asyncio')
     app.config.DB_CONN = await r.connect(
