@@ -52,10 +52,11 @@ def handle_offer_creation(create_offer, header, state):
     if not create_offer.source:
         raise InvalidTransaction(
             "Failed to create Offer, Offer source is not specified.")
-
-    if create_offer.source_quantity == 0:
-        raise InvalidTransaction("Failed to create Offer, source_quantity "
-                                 "was unset or 0")
+    
+    #FARZAD Change : accept zero source_quantity
+    # if create_offer.source_quantity == 0:
+    #     raise InvalidTransaction("Failed to create Offer, source_quantity "
+    #                              "was unset or 0")
 
     source_holding = state.get_holding(identifier=create_offer.source)
     if not source_holding:
