@@ -74,11 +74,12 @@ def handle_offer_creation(create_offer, header, state):
             "Failed to create Offer, source asset {} are not "
             "transferable".format(source_asset.name))
 
-    if create_offer.target and not create_offer.target_quantity or \
-            create_offer.target_quantity and not create_offer.target:
-        raise InvalidTransaction("Failed to create Offer, target and "
-                                 "target_quantity must both be set or "
-                                 "both unset.")
+    #FARZAD Change : accept zero target_quantity
+    # if create_offer.target and not create_offer.target_quantity or \
+    #         create_offer.target_quantity and not create_offer.target:
+    #     raise InvalidTransaction("Failed to create Offer, target and "
+    #                              "target_quantity must both be set or "
+    #                              "both unset.")
 
     if create_offer.target:
         target_holding = state.get_holding(identifier=create_offer.target)
