@@ -61,13 +61,14 @@ const inSetter = state => (holding, hasNew) => () => {
 
 
 
-// FARZAD Change : accept zero sourceQuantity
+// FARZAD Change : accept zero sourceQuantity2
 const countSetter = state => inQuantity => {
-  
-  if (state.offer.sourceQuantity){
-    console.log('state.offer.sourceQuantity : ' + state.offer.sourceQuantity)
-  }
-  else{
+
+  alert('inQuantity' + inQuantity)
+  alert('state.offer.sourceQuantity' + state.offer.sourceQuantity)
+
+  if(inQuantity !=0  && state.offer.sourceQuantity !=0 ){
+
     let count = Math.floor(inQuantity / state.offer.sourceQuantity)
     if (inQuantity !== 0) count = Math.max(count, 1)
 
@@ -84,10 +85,18 @@ const countSetter = state => inQuantity => {
       count = Math.floor(state.outMax / state.offer.targetQuantity)
     }
 
+
     state.acceptance.count = count
     state.inQuantity = count * state.offer.sourceQuantity
     state.outQuantity = count * state.offer.targetQuantity
+
+  }else{
+    state.acceptance.count = 0
+    state.inQuantity = count * 0
+    state.outQuantity = count * state.offer.targetQuantity
   }
+
+
 }
 
 // Returns a function to map holding data to dropdown options
