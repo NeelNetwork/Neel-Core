@@ -59,26 +59,35 @@ const inSetter = state => (holding, hasNew) => () => {
   state.hasNewHolding = hasNew
 }
 
+
+
+// FARZAD Change : accept zero sourceQuantity
 const countSetter = state => inQuantity => {
-  let count = Math.floor(inQuantity / state.offer.sourceQuantity)
-  if (inQuantity !== 0) count = Math.max(count, 1)
-
-  const exchangeOnce = state.offer.rules.find(({ type }) => {
-    return type.slice(0, 13) === 'EXCHANGE_ONCE'
-  })
-  if (exchangeOnce) count = Math.min(count, 1)
-
-  if (count * state.offer.sourceQuantity > state.inMax) {
-    count = Math.floor(state.inMax / state.offer.sourceQuantity)
+  
+  if (state.offer.sourceQuantity){
+    console.log('state.offer.sourceQuantity : ' + state.offer.sourceQuantity)
   }
+  else{
+    let count = Math.floor(inQuantity / state.offer.sourceQuantity)
+    if (inQuantity !== 0) count = Math.max(count, 1)
 
-  if (count * state.offer.targetQuantity > state.outMax) {
-    count = Math.floor(state.outMax / state.offer.targetQuantity)
+    const exchangeOnce = state.offer.rules.find(({ type }) => {
+      return type.slice(0, 13) === 'EXCHANGE_ONCE'
+    })
+    if (exchangeOnce) count = Math.min(count, 1)
+
+    if (count * state.offer.sourceQuantity > state.inMax) {
+      count = Math.floor(state.inMax / state.offer.sourceQuantity)
+    }
+
+    if (count * state.offer.targetQuantity > state.outMax) {
+      count = Math.floor(state.outMax / state.offer.targetQuantity)
+    }
+
+    state.acceptance.count = count
+    state.inQuantity = count * state.offer.sourceQuantity
+    state.outQuantity = count * state.offer.targetQuantity
   }
-
-  state.acceptance.count = count
-  state.inQuantity = count * state.offer.sourceQuantity
-  state.outQuantity = count * state.offer.targetQuantity
 }
 
 // Returns a function to map holding data to dropdown options
