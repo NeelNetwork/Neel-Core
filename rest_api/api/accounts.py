@@ -34,6 +34,10 @@ from db import auth_query
 from marketplace_transaction import transaction_creation
 
 
+import asyncio
+
+
+
 ACCOUNTS_BP = Blueprint('accounts')
 
 
