@@ -55,8 +55,7 @@ def handle_send_payment(send_payment, header, state):
 
     if source_account and dest_account :
         raise InvalidTransaction("Both source and dest accounts must exist")
-
-    return "success!!!"
+    raise InvalidTransaction("Both ?source and dest accounts must exist")
     #TODO
     # if source_account.CheckingBalance < sendPaymentData.Amount {
     #     return &processor.InvalidTransactionError{Msg: "Insufficient funds in source checking account"}

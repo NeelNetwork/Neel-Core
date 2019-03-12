@@ -301,19 +301,37 @@ def close_offer(txn_key, batch_key, identifier):
         txn_key=txn_key,
         batch_key=batch_key)
 
-def transfer_asset():
+def transfer_asset(txn_key, batch_key ,source, dest, asset, amount):
     """Create a CreateAccount txn and wrap it in a batch and list.
-
+    TODO
     Args:
         txn_key (sawtooth_signing.Signer): The Txn signer key pair.
         batch_key (sawtooth_signing.Signer): The Batch signer key pair.
-        label (str): The account's label.
-        description (str): The description of the account.
+        targetID (sawtooth_signing.Signer): The Txn signer key pair.
+        amount : Transfering amount.
 
     Returns:
-        tuple: List of Batch, signature tuple
+        IDK
     """
-    return {"Succes":7}
+
+    inputs = [addresser.make_account_address(source)]
+
+    outputs = [addresser.make_account_address(dest)]
+    
+    payload = payload_pb2.TransactionPayload(
+        payload_type=payload_pb2.TransactionPayload.SEND_PAYMENT,
+        source_customer_id = source,
+        dest_customer_id = dest ,
+        asset = asset,
+        amount = amount)
+
+
+    return make_header_and_batch(
+        payload=payload,
+        inputs=inputs,
+        outputs=outputs,
+        txn_key=txn_key,
+        batch_key=batch_key)
     
 
 

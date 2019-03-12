@@ -150,7 +150,19 @@ async def transfer_asset(request):
     token = common.deserialize_auth_token(
         request.app.config.SECRET_KEY, request.token)
 
-    return transaction_creation.transfer_asset()
+    signer = await common.get_signer(request)
+    await asyncio.sleep(2.0)  # Mitigate race condition
+
+
+    required_fields = ['targetID', 'assetName', 'amount']
+    common.validate_fields(required_fields, request.json)
+
+
+    targetID = request.json.get('targetID')
+    assetName = request.json.get('assetName')
+    amount = request.json.get('amount')
+
+    return transaction_creation.transfer_asset(signer, request.app.config.SIGNER ,signer.get_public_key().as_hex(), targetID, assetName, amount)
 
     # update = {}
     # if request.json.get('password'):
