@@ -316,7 +316,10 @@ def send_payment(txn_key, batch_key ,source, dest, asset, amount):
     Returns:
         IDK
     """
-    json.loads("{'key' : 'zaza'}")
+    m = {'id': 7, 'name': 'farz'}
+    n = json.dumps(m)
+    return json.loads(n)
+    
     
 
 class OfferParticipant(object):
