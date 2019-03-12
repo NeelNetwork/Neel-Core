@@ -32,7 +32,6 @@ from db import accounts_query
 from db import auth_query
 
 from marketplace_transaction import transaction_creation
-from marketplace_transaction import transfer_asset
 
 
 import asyncio
@@ -165,7 +164,7 @@ async def transfer_asset(request):
     assetName = request.json.get('assetName')
     amount = request.json.get('amount')
 
-    return transfer_asset.transfer_asset(signer, request.app.config.SIGNER ,signer.get_public_key().as_hex(), targetID, assetName, amount)
+    return transaction_creation.send_payment(signer, request.app.config.SIGNER ,signer.get_public_key().as_hex(), targetID, assetName, amount)
 
     # update = {}
     # if request.json.get('password'):
