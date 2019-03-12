@@ -316,7 +316,7 @@ def send_payment(txn_key, batch_key ,source, dest, asset, amount):
     Returns:
         IDK
     """
-    json.loads("response.text")
+    json.loads("{'key' : 'zaza'}")
     
 
 class OfferParticipant(object):
