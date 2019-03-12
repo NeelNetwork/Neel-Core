@@ -301,7 +301,7 @@ def close_offer(txn_key, batch_key, identifier):
         txn_key=txn_key,
         batch_key=batch_key)
 
-def transfer_asset(txn_key, batch_key, label, description):
+def transfer_asset():
     """Create a CreateAccount txn and wrap it in a batch and list.
 
     Args:
