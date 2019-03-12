@@ -78,5 +78,11 @@ class MarketplaceHandler(TransactionHandler):
                 header=transaction.header,
                 state=state)
 
+        elif payload.is_send_payment():
+                account_creation.handle_send_payment(
+                payload.send_payment(),
+                header=transaction.header,
+                state=state)
+
         else:
             raise InvalidTransaction("Transaction payload type unknown.")

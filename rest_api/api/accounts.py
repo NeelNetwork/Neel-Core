@@ -143,6 +143,45 @@ async def update_account_info(request):
             'account': updated_auth_info
         })
 
+@ACCOUNTS_BP.post('accounts/transfer')
+@authorized()
+async def transfer_asset(request):
+    """Updates auth information for the authorized account"""
+    token = common.deserialize_auth_token(
+        request.app.config.SECRET_KEY, request.token)
+
+    return transaction_creation.transfer_asset()
+
+    # update = {}
+    # if request.json.get('password'):
+    #     update['hashed_password'] = bcrypt.hashpw(
+    #         bytes(request.json.get('password'), 'utf-8'), bcrypt.gensalt())
+    # if request.json.get('email'):
+    #     update['email'] = request.json.get('email')
+
+    # if update:
+    #     updated_auth_info = await auth_query.update_auth_info(
+    #         request.app.config.DB_CONN,
+    #         token.get('email'),
+    #         token.get('public_key'),
+    #         update)
+    #     new_token = common.generate_auth_token(
+    #         request.app.config.SECRET_KEY,
+    #         updated_auth_info.get('email'),
+    #         updated_auth_info.get('publicKey'))
+    # else:
+    #     updated_auth_info = await accounts_query.fetch_account_resource(
+    #         request.app.config.DB_CONN,
+    #         token.get('public_key'),
+    #         token.get('public_key'))
+    #     new_token = request.token
+
+    # return response.json(
+    #     {
+    #         'authorization': new_token,
+    #         'account': updated_auth_info
+    #     })
+
 
 def _create_account_dict(body, public_key):
     keys = ['label', 'description', 'email']

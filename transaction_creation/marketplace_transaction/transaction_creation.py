@@ -301,6 +301,22 @@ def close_offer(txn_key, batch_key, identifier):
         txn_key=txn_key,
         batch_key=batch_key)
 
+def transfer_asset(txn_key, batch_key, label, description):
+    """Create a CreateAccount txn and wrap it in a batch and list.
+
+    Args:
+        txn_key (sawtooth_signing.Signer): The Txn signer key pair.
+        batch_key (sawtooth_signing.Signer): The Batch signer key pair.
+        label (str): The account's label.
+        description (str): The description of the account.
+
+    Returns:
+        tuple: List of Batch, signature tuple
+    """
+    return {"Succes":7}
+    
+
+
 
 class OfferParticipant(object):
 
