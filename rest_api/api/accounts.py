@@ -31,13 +31,11 @@ from api.errors import ApiInternalError
 from db import accounts_query
 from db import auth_query
 
-from marketplace_transaction import transaction_asset
+from marketplace_transaction import transaction_creation
 from marketplace_transaction import transfer_asset
 
 
 import asyncio
-
-
 
 ACCOUNTS_BP = Blueprint('accounts')
 
