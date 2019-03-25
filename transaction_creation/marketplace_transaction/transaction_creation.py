@@ -303,23 +303,6 @@ def close_offer(txn_key, batch_key, identifier):
         txn_key=txn_key,
         batch_key=batch_key)
 
-
-def send_payment(txn_key, batch_key ,source, dest, asset, amount):
-    """Create a CreateAccount txn and wrap it in a batch and list.
-    TODO
-    Args:
-        txn_key (sawtooth_signing.Signer): The Txn signer key pair.
-        batch_key (sawtooth_signing.Signer): The Batch signer key pair.
-        targetID (sawtooth_signing.Signer): The Txn signer key pair.
-        amount : Transfering amount.
-
-    Returns:
-        IDK
-    """
-    m = {'id': 7, 'name': 'farz'}
-    n = json.dumps(m)
-    return json.loads(n)
-    
     
 
 class OfferParticipant(object):

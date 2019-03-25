@@ -164,7 +164,8 @@ async def transfer_asset(request):
     assetName = request.json.get('assetName')
     amount = request.json.get('amount')
 
-    return transaction_creation.send_payment(signer, request.app.config.SIGNER ,signer.get_public_key().as_hex(), targetID, assetName, amount)
+
+    return send_payment(request ,signer.get_public_key().as_hex(), targetID, assetName, amount)
 
     # update = {}
     # if request.json.get('password'):
@@ -220,3 +221,28 @@ def _create_auth_dict(request, public_key, private_key):
         bytes(request.json.get('password'), 'utf-8'), bcrypt.gensalt())
 
     return auth_entry
+
+
+def send_payment(request ,source, dest, asset, amount):
+    """Create a CreateAccount txn and wrap it in a batch and list.
+    TODO
+    Args:
+        txn_key (sawtooth_signing.Signer): The Txn signer key pair.
+        batch_key (sawtooth_signing.Signer): The Batch signer key pair.
+        targetID (sawtooth_signing.Signer): The Txn signer key pair.
+        amount : Transfering amount.
+
+    Returns:
+        IDK
+    """
+    # m = {'id': 7, 'name': 'farz'}
+    # n = json.dumps(m)
+    # return json.loads(n)
+    auth_entry = _create_auth_dict(request, public_key, private_key.as_hex())
+    userSource = await auth_query.fetch_account_resource(request.app.config.DB_CONN, auth_entry)
+    
+
+    return response.json(
+        {
+            'userSource': srt(userSource)
+        })
